@@ -19,6 +19,6 @@ export const formatJSONResponse = (
 ) => {
   return {
     statusCode,
-    body: response,
+    body: response ? JSON.stringify(response) : "",
   };
 };
