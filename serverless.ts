@@ -1,5 +1,6 @@
 import type { AWS } from "@serverless/typescript";
 
+import rss from "@functions/rss";
 
 const serverlessConfiguration: AWS = {
   service: "crunchyroll-notifier",
@@ -26,6 +27,8 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: "20201221",
   },
+  // import the function via paths
+  functions: { rss },
 };
 
 module.exports = serverlessConfiguration;
