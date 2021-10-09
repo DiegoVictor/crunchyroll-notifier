@@ -6,7 +6,8 @@
       "@libs/*": ["src/libs/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@services/*": ["src/services/*"],
-      "@parsers/*": ["src/parsers/*"]
+      "@parsers/*": ["src/parsers/*"],
+      "@use_cases/*": ["src/use_cases/*"]
     }
   }
 }
