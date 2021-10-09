@@ -1,1 +1,1 @@
-export { default as rss } from "./rss";
+export { default as episodes } from "./episodes";
