@@ -1,0 +1,1 @@
+aws --endpoint-url=http://127.0.0.1:4566 sqs create-queue --queue-name episodes
