@@ -1,6 +1,6 @@
 import type { AWS } from "@serverless/typescript";
 
-import episodes from "@functions/episodes";
+import getEpisodes from "@functions/episodes/get";
 
 const serverlessConfiguration: AWS = {
   service: "crunchyroll-notifier",
@@ -28,7 +28,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: "20201221",
   },
   // import the function via paths
-  functions: { episodes },
+  functions: { getEpisodes },
 };
 
 module.exports = serverlessConfiguration;
