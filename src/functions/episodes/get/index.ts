@@ -1,7 +1,7 @@
 import { handlerPath } from "@libs/handlerResolver";
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.episodes`,
+  handler: `${handlerPath(__dirname)}/handler.get`,
   events: [
     {
       http: {
