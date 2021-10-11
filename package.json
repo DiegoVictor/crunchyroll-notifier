@@ -1,7 +1,6 @@
 {
   "name": "crunchyroll-notifier",
   "version": "1.0.0",
-  "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
   "scripts": {
     "dev:server": "nodemon --exec sls offline"
@@ -32,6 +31,5 @@
     "webpack": "^5.20.2",
     "webpack-node-externals": "^2.5.2"
   },
-  "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT"
 }
