@@ -6,5 +6,5 @@ services:
     ports:
       - 4566:4566
     environment:
-      SERVICES: dynamodb,sqs
+      SERVICES: dynamodb,sqs,sns
 
