@@ -1,6 +1,6 @@
 import * as parser from "xml-js";
 
-import { Node } from "src/application/contracts/Node";
+import { Node } from "@application/contracts/Node";
 
 export const toJS = (xml: string) => {
   return parser.xml2js(xml, {
