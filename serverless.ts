@@ -16,6 +16,9 @@ const serverlessConfiguration: AWS = {
     name: "aws",
     runtime: "nodejs14.x",
     region: "us-east-1",
+    eventBridge: {
+      useCloudFormation: true,
+    },
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
