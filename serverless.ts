@@ -5,12 +5,15 @@ import getEpisodes from "@functions/episodes/get";
 const serverlessConfiguration: AWS = {
   service: "crunchyroll-notifier",
   frameworkVersion: "2",
+  variablesResolutionMode: "20210326",
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.js",
       includeModules: true,
     },
+    executionIntervalMinutes: 30,
   },
+  configValidationMode: "error",
   plugins: ["serverless-webpack", "serverless-offline"],
   provider: {
     name: "aws",
