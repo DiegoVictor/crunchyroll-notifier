@@ -12,7 +12,8 @@ export function getNodeFrom(name: string, from: Node[]): Node | null {
   const item = from.find((element) => element.name === name);
 
   if (item && item.elements && item.elements.length > 0) {
-    return item.elements.pop();
+    const [element] = item.elements;
+    return element;
   }
 
   if (name.includes("media") && item.attributes && item.attributes.url) {
