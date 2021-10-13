@@ -9,5 +9,10 @@ export default {
         path: "episodes",
       },
     },
+    {
+      eventBridge: {
+        schedule: "rate(${self:custom.executionIntervalMinutes} minutes)",
+      },
+    },
   ],
 };
