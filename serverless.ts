@@ -44,7 +44,19 @@ const serverlessConfiguration: AWS = {
     ],
   },
   // import the function via paths
-  functions: { getEpisodes },
+  functions: {
+    getEpisodes,
+  },
+  resources: {
+    Resources: {
+      EpisodesQueue: {
+        Type: "AWS::SQS::Queue",
+        Properties: {
+          QueueName: "episodes-${opt:stage}-sqs",
+        },
+      },
+    },
+  },
 };
 
 module.exports = serverlessConfiguration;
