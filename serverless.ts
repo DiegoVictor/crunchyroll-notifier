@@ -28,8 +28,7 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
-      EXECUTION_INTERVAL_MINUTES: "15",
-      LOCALSTACK_ENDPOINT: "http://localhost:4566",
+      EXECUTION_INTERVAL_MINUTES: "${self:custom.executionIntervalMinutes}",
     },
     lambdaHashingVersion: "20201221",
   },
