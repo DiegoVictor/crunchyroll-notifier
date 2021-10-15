@@ -5,6 +5,13 @@ export const NoContent = () => {
   };
 };
 
+export const OK = <T>(body: T) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify(body),
+  };
+};
+
 export const InternalServerError = (response: Record<string, unknown>) => {
   return {
     statusCode: 500,
