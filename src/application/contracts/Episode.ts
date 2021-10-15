@@ -11,4 +11,8 @@ export interface Episode {
   premiumPublishDate: number;
   freePublishDate: number;
 }
+
+export interface Restrictions extends Pick<Episode, "premiumPublishDate"> {
+  subtitles: string[];
+  country?: string[];
 }
