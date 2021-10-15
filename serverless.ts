@@ -33,6 +33,15 @@ const serverlessConfiguration: AWS = {
         "https://sqs.${self:provider.region}.amazonaws.com/${aws:accountId}/episodes-${opt:stage}-sqs",
     },
     lambdaHashingVersion: "20201221",
+    iamRoleStatements: [
+      {
+        Effect: "Allow",
+        Action: ["sqs:SendMessage", "sqs:ReceiveMessage", "sqs:DeleteMessage"],
+        Resource: {
+          "Fn::GetAtt": ["EpisodesQueue", "Arn"],
+        },
+      },
+    ],
   },
   // import the function via paths
   functions: { getEpisodes },
