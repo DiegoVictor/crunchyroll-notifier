@@ -1,3 +1,4 @@
+import * as xml from "@infra/libs/xml";
 import { Episode } from "@application/contracts/Episode";
 import { getAnimesRss } from "@infra/services/cruchyroll";
 
