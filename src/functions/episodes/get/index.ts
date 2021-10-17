@@ -1,4 +1,4 @@
-import { handlerPath } from "@libs/handlerResolver";
+import { handlerPath } from "@infra/libs/handlerResolver";
 
 export default {
   handler: `${handlerPath(__dirname)}/handler.get`,
