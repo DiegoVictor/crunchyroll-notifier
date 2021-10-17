@@ -1,7 +1,8 @@
 import { isAfter, subMinutes } from "date-fns";
 
+import { episodesMap, restrictionsMap } from "@application/parsers/episodes";
 import * as xml from "@infra/libs/xml";
-import { Episode } from "@application/contracts/Episode";
+import { Episode, Restrictions } from "@application/contracts/Episode";
 import { getAnimesRss } from "@infra/services/cruchyroll";
 
 export const getNewEpisodes = async (fromDate?: string): Promise<Episode[]> => {
@@ -23,6 +24,23 @@ export const getNewEpisodes = async (fromDate?: string): Promise<Episode[]> => {
   const episodes = new Map();
 
   if (isAfter(new Date(lastBuildDate), lastRun)) {
+    channel.elements.forEach((item) => {
+      if (item.name === "item") {
+        const { country, subtitles, premiumPublishDate } =
+          xml.mapFields<Restrictions>(item, restrictionsMap);
+
+        if (
+          country.includes("br") &&
+          subtitles &&
+          subtitles.includes("pt - br") &&
+          subtitles.length > 1 &&
+          isAfter(premiumPublishDate, lastRun)
+        ) {
+          const episode = xml.mapFields<Episode>(item, episodesMap);
+          episodes.set(episode.title, episode);
+        }
+      }
+    });
   }
 
   return Array.from(episodes).map(([, episode]) => episode);
