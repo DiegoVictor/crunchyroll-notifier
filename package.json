@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "serverless.ts",
   "scripts": {
-    "dev:server": "nodemon --exec sls offline --stage dev",
+    "dev:server": "nodemon --exec sls offline --stage stg",
     "deploy:stg": "sls deploy --stage stg",
     "remove:stg": "sls remove --stage stg"
   },
