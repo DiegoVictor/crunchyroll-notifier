@@ -2,6 +2,8 @@ import { SQS } from "@aws-sdk/client-sqs";
 import { randomUUID } from "crypto";
 
 import { Episode } from "@application/contracts/Episode";
+import { Message } from "@infra/contracts/Message";
+
 const sqs = new SQS({});
 
 export const sendMessageBatch = async (episodes: Episode[]) => {
@@ -13,3 +15,20 @@ export const sendMessageBatch = async (episodes: Episode[]) => {
     })),
   });
 };
+
+export const receiveMessages = async (): Promise<Message<Episode>[]> =>
+  sqs
+    .receiveMessage({
+      MaxNumberOfMessages: 10,
+      QueueUrl: process.env.QUEUE_URL,
+    })
+    .then((result) => {
+      if (result.Messages) {
+        return result.Messages.map((message) => ({
+          Id: message.MessageId,
+          ReceiptHandle: message.ReceiptHandle,
+          MessageBody: JSON.parse(message.Body),
+        }));
+      }
+      return [];
+    });
