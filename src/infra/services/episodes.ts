@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 
 import { Episode } from "@application/contracts/Episode";
 import { Message } from "@infra/contracts/Message";
+import { mapFields } from "@application/parsers/episodes";
 
 const sqs = new SQS({});
 
@@ -32,3 +33,7 @@ export const receiveMessages = async (): Promise<Message<Episode>[]> =>
       }
       return [];
     });
+
+
+export const getFrom = (messages: Message<Episode>[]) =>
+  messages.map(({ MessageBody }) => mapFields(MessageBody));
