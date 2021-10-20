@@ -1,13 +1,17 @@
+export enum Channel {
+  free = "free",
+  premium = "premium",
+}
+
 export interface Episode {
   id?: string;
-  type: "premium" | "free";
+  notified: Channel[];
   serie: string;
   title: string;
   number: number;
   season: number;
   description: string;
   thumbnail: string;
-  notified?: string[];
   premiumPublishDate: number;
   freePublishDate: number;
 }
