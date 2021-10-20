@@ -5,6 +5,10 @@ import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/epi
 export const store = async () => {
   try {
     const messages: Message<Episode>[] = await receiveMessagesFromQueue();
+
+    if (messages.length > 0) {
+    }
+
     return response.NoContent();
   } catch (err) {
     return response.InternalServerError(err);
