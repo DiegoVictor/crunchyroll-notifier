@@ -15,6 +15,8 @@ export const store = async () => {
         episodes
       );
 
+      if (animes.length > 0) {
+      }
     }
 
     return response.NoContent();
