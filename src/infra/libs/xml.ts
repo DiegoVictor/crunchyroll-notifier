@@ -1,6 +1,6 @@
 import * as parser from "xml-js";
 
-type Parser = (value: string) => string | string[] | Date;
+type Parser = (value: string) => string | string[] | Date | number;
 
 interface FieldsMap {
   [key: string]: { tagName: string; parser?: Parser };
