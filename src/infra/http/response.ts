@@ -12,7 +12,7 @@ export const OK = <T>(body: T) => {
   };
 };
 
-export const InternalServerError = (response: Record<string, unknown>) => {
+export const InternalServerError = (response: Error) => {
   return {
     statusCode: 500,
     body: JSON.stringify(response),
