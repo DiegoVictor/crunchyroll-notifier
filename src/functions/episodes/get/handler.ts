@@ -16,6 +16,8 @@ export const get = async (event: APIGatewayProxyEvent) => {
 
     return response.NoContent();
   } catch (err) {
+    console.log(err);
+
     return response.InternalServerError(err);
   }
 };
