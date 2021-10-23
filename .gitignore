@@ -2,3 +2,4 @@ node_modules
 .webpack
 *.xml
 .serverless
+tests/coverage
