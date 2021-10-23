@@ -1,7 +1,7 @@
 import "source-map-support/register";
 import { APIGatewayProxyEvent } from "aws-lambda";
 
-import * as response from "@infra/libs/response";
+import * as response from "@infra/http/response";
 import { getNewEpisodes } from "@application/use_cases/getNewEpisodes";
 import { addEpisodesInQueue } from "@application/use_cases/addEpisodesInQueue";
 
