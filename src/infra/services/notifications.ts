@@ -1,3 +1,5 @@
+import { SNS } from "@aws-sdk/client-sns";
+const sns = new SNS({});
 export const sendSubscribeRequest = async ({ topic }: Anime) => {
   await sns.publish({
     Message: JSON.stringify({
