@@ -1,5 +1,6 @@
 import { Episode } from "@application/contracts/Episode";
 import { createNewAnimesTopics } from "@application/use_cases/createNewAnimesTopics";
+import { saveEpisodesAndAnimes } from "@infra/repositories/implementations/batch";
 import { Message } from "@infra/contracts/Message";
 import { sendNewAnimesAlertNotification } from "@application/use_cases/sendNewAnimesAlertNotification";
 import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeactivatedAnimes";
@@ -19,6 +20,10 @@ export const store = async () => {
           sendNewAnimesAlertNotification(animes)
         );
       }
+
+      const promises: Promise<void | void[]>[] = [
+        saveEpisodesAndAnimes(episodes, animes),
+      ];
     }
 
     return response.NoContent();
