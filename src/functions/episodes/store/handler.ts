@@ -1,8 +1,7 @@
 import { Episode } from "@application/contracts/Episode";
-import { getFrom as getEpisodesFromMessages } from "@infra/services/episodes";
+import { createNewAnimesTopics } from "@application/use_cases/createNewAnimesTopics";
 import { Message } from "@infra/contracts/Message";
-import * as response from "@infra/libs/response";
-import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/episodes";
+import { sendNewAnimesAlertNotification } from "@application/use_cases/sendNewAnimesAlertNotification";
 import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeactivatedAnimes";
 
 export const store = async () => {
@@ -16,6 +15,9 @@ export const store = async () => {
       );
 
       if (animes.length > 0) {
+        await createNewAnimesTopics(animes).then(() =>
+          sendNewAnimesAlertNotification(animes)
+        );
       }
     }
 
