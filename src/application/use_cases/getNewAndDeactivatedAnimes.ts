@@ -1,5 +1,5 @@
 import { Episode } from "@application/contracts/Episode";
-import { findByTitle as findAnimesByTitle } from "@infra/repositories/implementations/animes";
+import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
 import { mapFields } from "@application/parsers/animes";
 
 export const getNewAndDeactivatedAnimes = async (episodes: Episode[]) => {

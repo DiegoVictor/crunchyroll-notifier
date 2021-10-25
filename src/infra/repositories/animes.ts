@@ -1,12 +1,26 @@
-import { DynamoDB, ScanCommandOutput } from "@aws-sdk/client-dynamodb";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-import { Anime } from "@application/contracts/Anime";
+import { mapFields } from "@application/parsers/animes";
 
 const dynamoDB = new DynamoDB({});
 
-const mapToAnime = ({ Items }: ScanCommandOutput) =>
-  Items.map((item) => unmarshall(item) as Anime);
+export const getActive = async () =>
+  dynamoDB
+    .scan({
+      TableName: "Animes",
+      ScanFilter: {
+        active: {
+          ComparisonOperator: "EQ",
+          AttributeValueList: [
+            {
+              BOOL: true,
+            },
+          ],
+        },
+      },
+    })
+    .then(({ Items }) => Items.map((item) => mapFields(unmarshall(item))));
 
 export const findByTitle = async (animes: string[]) =>
   dynamoDB
@@ -21,9 +35,9 @@ export const findByTitle = async (animes: string[]) =>
         },
       },
     })
-    .then(mapToAnime);
+    .then(({ Items }) => Items.map((item) => mapFields(unmarshall(item))));
 
-export const setAnimeAsActive = async ({ id }: Anime) => {
+export const setAnimeAsActive = async (id: string) => {
   await dynamoDB.updateItem({
     TableName: "Animes",
     Key: marshall({
