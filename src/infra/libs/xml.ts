@@ -1,20 +1,7 @@
 import * as parser from "xml-js";
 
-type Parser = (value: string) => string | string[] | Date | number;
-
-interface FieldsMap {
-  [key: string]: { tagName: string; parser?: Parser };
-}
-
-interface Node {
-  type: string;
-  name: string;
-  text?: string;
-  elements?: Node[];
-  attributes?: {
-    url?: string;
-  };
-}
+import { Node } from "@infra/contracts/Node";
+import { FieldsMap } from "@infra/contracts/FieldsMap";
 
 export const toJS = (xml: string) => {
   return parser.xml2js(xml, {
