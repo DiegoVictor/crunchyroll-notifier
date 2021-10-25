@@ -5,10 +5,10 @@ export enum Channel {
 
 export interface Episode {
   id?: string;
-  notified: Channel[];
+  notified?: Channel[];
   serie: string;
   title: string;
-  number: number;
+  number: string;
   season: number;
   description: string;
   thumbnail: string;
