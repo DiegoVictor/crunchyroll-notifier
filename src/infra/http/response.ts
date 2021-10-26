@@ -12,9 +12,12 @@ export const OK = <T>(body: T) => {
   };
 };
 
-export const InternalServerError = (response: Error) => {
+export const InternalServerError = () => {
   return {
     statusCode: 500,
-    body: JSON.stringify(response),
+    body: JSON.stringify({
+      code: 500,
+      message: "Ops! Something goes wrong, try again later",
+    }),
   };
 };

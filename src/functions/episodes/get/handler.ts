@@ -18,6 +18,6 @@ export const get = async (event: APIGatewayProxyEvent) => {
   } catch (err) {
     console.log(err);
 
-    return response.InternalServerError(err);
+    return response.InternalServerError();
   }
 };
