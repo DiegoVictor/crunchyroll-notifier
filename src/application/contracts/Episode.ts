@@ -9,7 +9,7 @@ export interface Episode {
   serie: string;
   title: string;
   number: string;
-  season: number;
+  season: string;
   description: string;
   thumbnail: string;
   premiumPublishDate: number;
