@@ -39,6 +39,8 @@ export const store = async () => {
 
     return response.NoContent();
   } catch (err) {
-    return response.InternalServerError(err);
+    console.log(err);
+
+    return response.InternalServerError();
   }
 };
