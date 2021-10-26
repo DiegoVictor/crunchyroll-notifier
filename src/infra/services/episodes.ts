@@ -17,7 +17,7 @@ export const sendMessageBatch = async (episodes: Episode[]) => {
   });
 };
 
-export const receiveMessages = async (): Promise<Message<Episode>[]> =>
+export const receiveMessages = async (): Promise<Message[]> =>
   sqs
     .receiveMessage({
       MaxNumberOfMessages: 10,
@@ -35,5 +35,5 @@ export const receiveMessages = async (): Promise<Message<Episode>[]> =>
     });
 
 
-export const getFrom = (messages: Message<Episode>[]) =>
+export const getFrom = (messages: Message[]) =>
   messages.map(({ MessageBody }) => mapFields(MessageBody));

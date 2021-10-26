@@ -1,4 +1,3 @@
-import { Episode } from "@application/contracts/Episode";
 import { createNewAnimesTopics } from "@application/use_cases/createNewAnimesTopics";
 import { setAnimesAsActive } from "@application/use_cases/setAnimesAsActive";
 import { saveEpisodesAndAnimes } from "@infra/repositories/implementations/batch";
@@ -8,7 +7,7 @@ import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeac
 
 export const store = async () => {
   try {
-    const messages: Message<Episode>[] = await receiveMessagesFromQueue();
+    const messages: Message[] = await receiveMessagesFromQueue();
 
     if (messages.length > 0) {
       const episodes = getEpisodesFromMessages(messages);

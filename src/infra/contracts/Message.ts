@@ -1,5 +1,7 @@
-export interface Message<T> {
+export interface Message {
   Id: string;
   ReceiptHandle: string;
-  MessageBody: T;
+  MessageBody: {
+    [key: string]: string;
+  };
 }
