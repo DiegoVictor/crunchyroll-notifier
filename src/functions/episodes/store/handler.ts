@@ -2,6 +2,12 @@ import { createNewAnimesTopics } from "@application/use_cases/createNewAnimesTop
 import { setAnimesAsActive } from "@application/use_cases/setAnimesAsActive";
 import { saveEpisodesAndAnimes } from "@infra/repositories/batch";
 import { Message } from "@infra/contracts/Message";
+import * as response from "@infra/http/response";
+import {
+  getFrom as getEpisodesFromMessages,
+  receiveMessages as receiveMessagesFromQueue,
+  deleteMessageBatch as removeMessagesFromQueue,
+} from "@infra/services/episodes";
 import { sendNewAnimesAlertNotification } from "@application/use_cases/sendNewAnimesAlertNotification";
 import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeactivatedAnimes";
 
