@@ -27,6 +27,8 @@ export const store = async () => {
       if (deactivated.length > 0) {
         promises.push(setAnimesAsActive(deactivated));
       }
+
+      await Promise.all(promises).then(() => removeMessagesFromQueue(messages));
     }
 
     return response.NoContent();
