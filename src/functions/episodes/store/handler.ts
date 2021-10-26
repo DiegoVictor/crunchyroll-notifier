@@ -1,6 +1,6 @@
 import { createNewAnimesTopics } from "@application/use_cases/createNewAnimesTopics";
 import { setAnimesAsActive } from "@application/use_cases/setAnimesAsActive";
-import { saveEpisodesAndAnimes } from "@infra/repositories/implementations/batch";
+import { saveEpisodesAndAnimes } from "@infra/repositories/batch";
 import { Message } from "@infra/contracts/Message";
 import { sendNewAnimesAlertNotification } from "@application/use_cases/sendNewAnimesAlertNotification";
 import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeactivatedAnimes";
