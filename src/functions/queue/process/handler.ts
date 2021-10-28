@@ -11,7 +11,7 @@ import { sendNewAnimesAlertNotification } from "@application/use_cases/sendNewAn
 import { getNewAndDeactivatedAnimes } from "@application/use_cases/getNewAndDeactivatedAnimes";
 import { getFromMessages as getEpisodesFromMessages } from "@infra/repositories/episodes";
 
-export const store = async () => {
+export const process = async () => {
   try {
     const messages: Message[] = await receiveMessagesFromQueue();
 

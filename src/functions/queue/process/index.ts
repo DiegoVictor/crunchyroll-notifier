@@ -1,12 +1,12 @@
 import { handlerPath } from "@infra/libs/handlerResolver";
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.store`,
+  handler: `${handlerPath(__dirname)}/handler.process`,
   events: [
     {
       http: {
-        method: "post",
-        path: "episodes",
+        method: "head",
+        path: "queue",
       },
     },
     {
