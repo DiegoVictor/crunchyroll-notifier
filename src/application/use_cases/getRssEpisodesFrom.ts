@@ -5,7 +5,7 @@ import * as xml from "@infra/libs/xml";
 import { Episode, Restrictions } from "@application/contracts/Episode";
 import { getAnimesRss } from "@infra/services/cruchyroll";
 
-export const getNewEpisodes = async (fromDate?: string): Promise<Episode[]> => {
+export const getRssEpisodesFrom = async (date?: string): Promise<Episode[]> => {
   const rss = await getAnimesRss();
 
   const { elements } = xml.toJS(rss);
@@ -17,7 +17,7 @@ export const getNewEpisodes = async (fromDate?: string): Promise<Episode[]> => {
   );
 
   const lastRun = subMinutes(
-    new Date(fromDate),
+    new Date(date),
     Number(process.env.EXECUTION_INTERVAL_MINUTES)
   );
 
