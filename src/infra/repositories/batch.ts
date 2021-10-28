@@ -17,7 +17,9 @@ export const saveEpisodesAndAnimes = async (
   if (episodes.length > 0) {
     requestItems.Episodes = episodes.map((episode) => ({
       PutRequest: {
-        Item: marshall(episode),
+        Item: marshall(episode, {
+          removeUndefinedValues: true,
+        }),
       },
     }));
   }
