@@ -1,6 +1,6 @@
 import type { AWS } from "@serverless/typescript";
 
-import getEpisodes from "@functions/episodes/get";
+import processRss from "@functions/rss/process";
 
 const serverlessConfiguration: AWS = {
   service: "crunchyroll-notifier",
@@ -45,7 +45,7 @@ const serverlessConfiguration: AWS = {
   },
   // import the function via paths
   functions: {
-    getEpisodes,
+    processRss,
   },
   resources: {
     Resources: {

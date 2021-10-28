@@ -1,12 +1,12 @@
 import { handlerPath } from "@infra/libs/handlerResolver";
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.get`,
+  handler: `${handlerPath(__dirname)}/handler.process`,
   events: [
     {
       http: {
-        method: "get",
-        path: "episodes",
+        method: "head",
+        path: "rss/process",
       },
     },
     {
