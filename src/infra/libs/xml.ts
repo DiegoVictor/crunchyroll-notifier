@@ -35,7 +35,8 @@ export function mapFields<T>(item: Node, fieldsMap: FieldsMap): T {
 
     const node = getNode(tagName, item.elements);
     if (node && node.text) {
-      const value = parser ? parser(node.text) : node.text;
+      const text = node.text.trim().replace(/\s{2,}/gi, " ");
+      const value = parser ? parser(text) : text;
       if (value) {
         map[property] = value;
       }
