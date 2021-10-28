@@ -55,6 +55,28 @@ const serverlessConfiguration: AWS = {
           QueueName: "episodes-${opt:stage}-sqs",
         },
       },
+      AnimesTable: {
+        Type: "AWS::DynamoDB::Table",
+        Properties: {
+          TableName: "Animes",
+          AttributeDefinitions: [
+            {
+              AttributeName: "id",
+              AttributeType: "S",
+            },
+          ],
+          KeySchema: [
+            {
+              AttributeName: "id",
+              KeyType: "HASH",
+            },
+          ],
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
+        },
+      },
     },
   },
 };
