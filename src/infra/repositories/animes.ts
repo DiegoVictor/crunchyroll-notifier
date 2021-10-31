@@ -2,6 +2,8 @@ import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 import { mapFields } from "@application/parsers/animes";
+import { Message } from "@infra/contracts/Message";
+import { Anime } from "@application/contracts/Anime";
 
 const dynamoDB = new DynamoDB({});
 
@@ -50,3 +52,11 @@ export const setAnimeAsActive = async (id: string) => {
     }),
   });
 };
+
+export const getFromMessages = (messages: Message[]): Anime[] =>
+  messages.reduce((animes, { MessageBody: { serie } }) => {
+    if (serie && !animes.includes(serie)) {
+      animes.push(mapFields({ title: serie }));
+    }
+    return animes;
+  }, []);
