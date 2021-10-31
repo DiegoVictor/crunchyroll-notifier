@@ -67,6 +67,11 @@ const serverlessConfiguration: AWS = {
           "Fn::GetAtt": ["EpisodesQueue", "Arn"],
         },
       },
+      {
+        Effect: "Allow",
+        Action: ["sns:Publish", "sns:CreateTopic"],
+        Resource: "arn:aws:sns:${self:provider.region}:${aws:accountId}:*",
+      },
     ],
   },
   // import the function via paths
