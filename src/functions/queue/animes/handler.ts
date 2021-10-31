@@ -3,6 +3,7 @@ import { APIGatewayProxyEvent } from "aws-lambda";
 import * as response from "@infra/http/response";
 import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
+import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
     const messages = await receiveMessagesFromQueue();
@@ -14,6 +15,11 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       if (items.length > 0) {
         animes.push(...items);
       }
+    }
+
+    if (animes.length > 0) {
+      const saved = await findAnimesByTitle(animes.map(({ title }) => title));
+
     }
 
     return response.NoContent();
