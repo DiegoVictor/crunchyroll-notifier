@@ -44,6 +44,24 @@ const serverlessConfiguration: AWS = {
     iamRoleStatements: [
       {
         Effect: "Allow",
+        Action: ["dynamoDB:Scan", "dynamodb:BatchWriteItem"],
+        Resource: {
+          "Fn::GetAtt": ["AnimesTable", "Arn"],
+        },
+      },
+      {
+        Effect: "Allow",
+        Action: [
+          "dynamoDB:Scan",
+          "dynamodb:BatchWriteItem",
+          "dynamoDB:UpdateItem",
+        ],
+        Resource: {
+          "Fn::GetAtt": ["EpisodesTable", "Arn"],
+        },
+      },
+      {
+        Effect: "Allow",
         Action: ["sqs:SendMessage", "sqs:ReceiveMessage", "sqs:DeleteMessage"],
         Resource: {
           "Fn::GetAtt": ["EpisodesQueue", "Arn"],
