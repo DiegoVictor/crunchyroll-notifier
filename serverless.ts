@@ -37,6 +37,8 @@ const serverlessConfiguration: AWS = {
       GENERAL_TOPIC_ARN: {
         Ref: "GeneralTopic",
       },
+      PLATFORM_APPLICATION_ARN:
+        "arn:aws:sns:${self:provider.region}:${aws:accountId}:app/GCM/crunchyroll-notifier-${opt:stage}",
     },
     lambdaHashingVersion: "20201221",
     iamRoleStatements: [
