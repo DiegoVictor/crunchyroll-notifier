@@ -4,6 +4,7 @@ import * as response from "@infra/http/response";
 import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
 import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
+import { Anime } from "@application/contracts/Anime";
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
     const messages = await receiveMessagesFromQueue();
