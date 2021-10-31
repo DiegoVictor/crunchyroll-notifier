@@ -30,8 +30,9 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       EXECUTION_INTERVAL_MINUTES: "${self:custom.executionIntervalMinutes}",
-      QUEUE_URL:
-        "https://sqs.${self:provider.region}.amazonaws.com/${aws:accountId}/episodes-${opt:stage}-sqs",
+      QUEUE_URL: {
+        Ref: "EpisodesQueue",
+      },
     },
     lambdaHashingVersion: "20201221",
     iamRoleStatements: [
