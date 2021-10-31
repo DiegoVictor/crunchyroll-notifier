@@ -110,6 +110,13 @@ const serverlessConfiguration: AWS = {
           TopicName: "${self:custom.episodesProcessingTopicName}",
         },
       },
+      GeneralTopic: {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          DisplayName: "General",
+          TopicName: "general-${opt:stage}-sns-topic",
+        },
+      },
     },
   },
 };
