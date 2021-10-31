@@ -26,14 +26,15 @@ export const findByTitle = async (animes: string[]) =>
   dynamoDB
     .scan({
       TableName: "Animes",
-      ScanFilter: {
-        title: {
-          ComparisonOperator: "IN",
-          AttributeValueList: animes.map((serie) => ({
-            S: serie,
-          })),
-        },
-      },
+      FilterExpression: `title IN (${animes
+        .map((_, index) => `:anime${index}`)
+        .join(",")})`,
+      ExpressionAttributeValues: marshall(
+        animes.reduce((values, anime, index) => {
+          values[`:anime${index}`] = anime;
+          return values;
+        }, {})
+      ),
     })
     .then(({ Items }) => Items.map((item) => mapFields(unmarshall(item))));
 
