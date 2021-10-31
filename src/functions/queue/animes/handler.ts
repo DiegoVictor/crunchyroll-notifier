@@ -16,6 +16,7 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       }
     }
 
+    return response.NoContent();
   } catch (err) {
     console.log(err);
 
