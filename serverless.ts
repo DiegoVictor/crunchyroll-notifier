@@ -33,6 +33,10 @@ const serverlessConfiguration: AWS = {
       QUEUE_URL: {
         Ref: "EpisodesQueue",
       },
+      TOPICS_ARN: "arn:aws:sns:${self:provider.region}:${aws:accountId}",
+      GENERAL_TOPIC_ARN: {
+        Ref: "GeneralTopic",
+      },
     },
     lambdaHashingVersion: "20201221",
     iamRoleStatements: [
