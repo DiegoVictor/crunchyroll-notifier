@@ -8,6 +8,14 @@ export const process = async (event?: APIGatewayProxyEvent) => {
     const messages = await receiveMessagesFromQueue();
     const animes: Anime[] =
       messages.length > 0 ? getAnimesFromMessages(messages) : [];
+
+    if (event && event.body && event.body.length > 0) {
+      const items = JSON.parse(event.body);
+      if (items.length > 0) {
+        animes.push(...items);
+      }
+    }
+
   } catch (err) {
     console.log(err);
 
