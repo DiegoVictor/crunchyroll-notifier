@@ -33,12 +33,12 @@ export const receiveMessages = async (): Promise<Message[]> =>
       return [];
     });
 
-export const deleteMessageBatch = async (episodes: Message[]) => {
+export const deleteMessageBatch = async (messages: Message[]) => {
   await sqs.deleteMessageBatch({
     QueueUrl: process.env.QUEUE_URL,
-    Entries: episodes.map((episode) => ({
-      Id: episode.Id,
-      ReceiptHandle: episode.ReceiptHandle,
+    Entries: messages.map((message) => ({
+      Id: message.Id,
+      ReceiptHandle: message.ReceiptHandle,
     })),
   });
 };
