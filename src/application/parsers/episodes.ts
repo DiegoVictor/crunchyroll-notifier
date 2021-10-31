@@ -4,6 +4,7 @@ import { Episode } from "@application/contracts/Episode";
 
 export const mapFields = ({
   id = randomUUID(),
+  notified = undefined,
   serie,
   title,
   number,
@@ -13,13 +14,14 @@ export const mapFields = ({
   premiumPublishDate,
   freePublishDate,
 }: {
-  [key: string]: string;
+  [key: string]: any;
 }): Episode => ({
   id,
+  notified: notified && Array.from(notified),
   serie,
   title,
   number,
-  season: Number(season),
+  season,
   description,
   thumbnail,
   premiumPublishDate: Number(premiumPublishDate),
