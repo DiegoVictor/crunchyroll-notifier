@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 
 import * as response from "@infra/http/response";
+import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
