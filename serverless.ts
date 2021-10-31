@@ -12,6 +12,7 @@ const serverlessConfiguration: AWS = {
       includeModules: true,
     },
     executionIntervalMinutes: 30,
+    episodesProcessingTopicName: "episodes-processing-${opt:stage}-sns-topic",
   },
   configValidationMode: "error",
   plugins: ["serverless-webpack", "serverless-offline"],
@@ -100,6 +101,13 @@ const serverlessConfiguration: AWS = {
           StreamSpecification: {
             StreamViewType: "NEW_IMAGE",
           },
+        },
+      },
+      EpisodesProcessingTopic: {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          DisplayName: "EpisodesProcessing",
+          TopicName: "${self:custom.episodesProcessingTopicName}",
         },
       },
     },
