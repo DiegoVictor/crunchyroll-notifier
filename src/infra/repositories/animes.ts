@@ -40,7 +40,7 @@ export const findByTitle = async (animes: string[]) =>
     })
     .then(({ Items }) => Items.map((item) => mapFields(unmarshall(item))));
 
-export const setAnimeAsActive = async (id: string) => {
+export const setAsActive = async (id: string) => {
   await dynamoDB.updateItem({
     TableName: "Animes",
     Key: marshall({
