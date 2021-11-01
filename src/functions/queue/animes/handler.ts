@@ -4,6 +4,7 @@ import * as response from "@infra/http/response";
 import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
 import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
+import { activateAnimesWhenNecessary } from "@application/use_cases/activateAnimesWhenNecessary";
 import { Anime } from "@application/contracts/Anime";
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
@@ -20,6 +21,11 @@ export const process = async (event?: APIGatewayProxyEvent) => {
 
     if (animes.length > 0) {
       const saved = await findAnimesByTitle(animes.map(({ title }) => title));
+
+      const promises = [];
+      if (saved.length > 0) {
+        promises.push(activateAnimesWhenNecessary(saved));
+      }
 
     }
 
