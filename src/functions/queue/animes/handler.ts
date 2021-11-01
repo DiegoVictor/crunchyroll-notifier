@@ -4,6 +4,7 @@ import * as response from "@infra/http/response";
 import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
 import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
+import { getOnlyNewAnimes } from "@application/use_cases/getOnlyNewAnimes";
 import { activateAnimesWhenNecessary } from "@application/use_cases/activateAnimesWhenNecessary";
 import { Anime } from "@application/contracts/Anime";
 export const process = async (event?: APIGatewayProxyEvent) => {
@@ -27,6 +28,7 @@ export const process = async (event?: APIGatewayProxyEvent) => {
         promises.push(activateAnimesWhenNecessary(saved));
       }
 
+      const onlyNew = getOnlyNewAnimes(animes, saved);
     }
 
     return response.NoContent();
