@@ -7,7 +7,7 @@ export const createTopic = async (Name: string) => {
   await sns.createTopic({ Name });
 };
 
-export const sendSubscribeRequest = async ({ topic }: Anime) => {
+export const sendSubscribeRequest = async (topic: string) => {
   await sns.publish({
     Message: JSON.stringify({
       default: "",
