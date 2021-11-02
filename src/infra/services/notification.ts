@@ -1,5 +1,5 @@
 import { SNS } from "@aws-sdk/client-sns";
-import { Anime } from "@application/contracts/Anime";
+import { Message } from "@infra/contracts/Message";
 
 const sns = new SNS({});
 
@@ -7,6 +7,14 @@ export const createTopic = async (Name: string) => {
   await sns.createTopic({ Name });
 };
 
+export const startProcessingEpisodesMessagesById = async (
+  messages: Message[]
+) => {
+  await sns.publish({
+    Message: JSON.stringify(messages),
+    TopicArn: process.env.EPISODES_PROCESSING_TOPIC_ARN,
+  });
+};
 export const sendSubscribeRequest = async (topic: string) => {
   await sns.publish({
     Message: JSON.stringify({
