@@ -60,3 +60,15 @@ export const getFromMessages = (messages: Message[]): Anime[] =>
     }
     return animes;
   }, []);
+
+export const saveMany = async (animes: Anime[]) => {
+  await dynamoDB.batchWriteItem({
+    RequestItems: {
+      Animes: animes.map((anime) => ({
+        PutRequest: {
+          Item: marshall<Anime>(anime),
+        },
+      })),
+    },
+  });
+};
