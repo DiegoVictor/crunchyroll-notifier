@@ -4,8 +4,10 @@ import * as response from "@infra/http/response";
 import { receiveMessages as receiveMessagesFromQueue } from "@infra/services/queue";
 import { getFromMessages as getAnimesFromMessages } from "@infra/repositories/animes";
 import { findByTitle as findAnimesByTitle } from "@infra/repositories/animes";
+import { saveMany as saveAnimes } from "@infra/repositories/animes";
 import { getOnlyNewAnimes } from "@application/use_cases/getOnlyNewAnimes";
 import { activateAnimesWhenNecessary } from "@application/use_cases/activateAnimesWhenNecessary";
+import { createAnimeTopics } from "@application/use_cases/createAnimeTopics";
 import { Anime } from "@application/contracts/Anime";
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
@@ -29,6 +31,10 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       }
 
       const onlyNew = getOnlyNewAnimes(animes, saved);
+      if (onlyNew.length > 0) {
+        promises.push(saveAnimes(onlyNew), createAnimeTopics(onlyNew));
+      }
+      await Promise.all(promises);
     }
 
     return response.NoContent();
