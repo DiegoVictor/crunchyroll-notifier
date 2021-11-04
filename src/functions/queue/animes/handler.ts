@@ -10,6 +10,7 @@ import { activateAnimesWhenNecessary } from "@application/use_cases/activateAnim
 import { createAnimeTopics } from "@application/use_cases/createAnimeTopics";
 import { Anime } from "@application/contracts/Anime";
 import { startProcessingEpisodesMessagesById } from "@infra/services/notification";
+import { mapFields } from "@application/parsers/animes";
 
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
@@ -20,7 +21,7 @@ export const process = async (event?: APIGatewayProxyEvent) => {
     if (event && event.body && event.body.length > 0) {
       const items = JSON.parse(event.body);
       if (items.length > 0) {
-        animes.push(...items);
+        animes.push(...items.map(mapFields));
       }
     }
 
