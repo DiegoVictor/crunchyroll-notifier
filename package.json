@@ -5,7 +5,7 @@
   "scripts": {
     "dev:server": "nodemon --exec sls offline --stage stg",
     "deploy:stg": "sls deploy --stage stg",
-    "remove:stg": "sls remove --stage stg"
+    "test": "jest --runInBand"
   },
   "engines": {
     "node": ">=14.15.0"
