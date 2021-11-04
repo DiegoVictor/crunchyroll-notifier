@@ -1,5 +1,5 @@
 import { Episode } from "@application/contracts/Episode";
-import { sendMessageBatch } from "@infra/services/episodes";
+import { sendMessageBatch } from "@infra/services/queue";
 
 export const addEpisodesInQueue = async (episodes: Episode[]): Promise<void> =>
   sendMessageBatch(episodes.splice(0, 10)).then(() => {
