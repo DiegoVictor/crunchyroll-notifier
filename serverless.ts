@@ -81,7 +81,9 @@ const serverlessConfiguration: AWS = {
       },
     ],
   },
-  // import the function via paths
+  package: {
+    patterns: ["!tests", "!scripts"],
+  },
   functions: {
     processRss,
     processAnimes,
