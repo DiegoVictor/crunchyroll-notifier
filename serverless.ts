@@ -70,7 +70,13 @@ const serverlessConfiguration: AWS = {
       },
       {
         Effect: "Allow",
-        Action: ["sns:Publish", "sns:CreateTopic"],
+        Action: [
+          "sns:Publish",
+          "sns:CreateTopic",
+          "sns:CreatePlatformEndpoint",
+          "sns:Subscribe",
+          "sns:Unsubscribe",
+        ],
         Resource: "arn:aws:sns:${self:provider.region}:${aws:accountId}:*",
       },
     ],
