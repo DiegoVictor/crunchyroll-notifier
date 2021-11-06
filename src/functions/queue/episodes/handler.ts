@@ -5,6 +5,11 @@ export const process: Handler<SNSEvent | APIGatewayProxyEvent> = async (
   event?
 ) => {
   try {
+    } else if ("Records" in event) {
+    if ("body" in event && event.body && event.body.length > 0) {
+    } else if ("Records" in event) {
+    }
+
     return response.NoContent();
   } catch (err) {
     console.log(err);
