@@ -1,12 +1,15 @@
 import { APIGatewayProxyEvent, Handler, SNSEvent } from "aws-lambda";
 
+import { saveMany as saveEpisodes } from "@infra/repositories/episodes";
 import * as response from "@infra/http/response";
+import { mapFields } from "@application/parsers/episodes";
+
 export const process: Handler<SNSEvent | APIGatewayProxyEvent> = async (
   event?
 ) => {
   try {
-    } else if ("Records" in event) {
     if ("body" in event && event.body && event.body.length > 0) {
+      await saveEpisodes(JSON.parse(event.body).map(mapFields));
     } else if ("Records" in event) {
     }
 
