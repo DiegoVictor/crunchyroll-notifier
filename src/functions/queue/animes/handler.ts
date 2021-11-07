@@ -9,7 +9,7 @@ import { getOnlyNewAnimes } from "@application/use_cases/getOnlyNewAnimes";
 import { activateAnimesWhenNecessary } from "@application/use_cases/activateAnimesWhenNecessary";
 import { createAnimeTopics } from "@application/use_cases/createAnimeTopics";
 import { Anime } from "@application/contracts/Anime";
-import { startProcessingEpisodesMessagesById } from "@infra/services/notification";
+import { processEpisodesMessage } from "@infra/services/notification";
 import { mapFields } from "@application/parsers/animes";
 
 export const process = async (event?: APIGatewayProxyEvent) => {
@@ -40,7 +40,7 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       await Promise.all(promises);
 
       if (globalThis.process.env.EPISODES_PROCESSING_TOPIC_ARN) {
-        await startProcessingEpisodesMessagesById(messages);
+        await processEpisodesMessage(messages);
       }
     }
 

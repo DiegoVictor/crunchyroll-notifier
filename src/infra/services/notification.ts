@@ -7,9 +7,7 @@ export const createTopic = async (Name: string) => {
   await sns.createTopic({ Name });
 };
 
-export const startProcessingEpisodesMessagesById = async (
-  messages: Message[]
-) => {
+export const processEpisodesMessage = async (messages: Message[]) => {
   await sns.publish({
     Message: JSON.stringify(messages),
     TopicArn: process.env.EPISODES_PROCESSING_TOPIC_ARN,
