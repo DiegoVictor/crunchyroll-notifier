@@ -16,6 +16,10 @@ export const process: Handler<SNSEvent | APIGatewayProxyEvent> = async (
       const messages = getMessagesFromRecords(event.Records);
 
       const episodes = getEpisodesFromMessages(messages);
+      if (episodes.length > 0) {
+        await saveEpisodes(episodes);
+      }
+
     }
 
     return response.NoContent();
