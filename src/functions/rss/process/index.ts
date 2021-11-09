@@ -7,6 +7,13 @@ export default {
       http: {
         method: "head",
         path: "rss/process",
+        request: {
+          parameters: {
+            querystrings: {
+              date: false,
+            },
+          },
+        },
       },
     },
     {
