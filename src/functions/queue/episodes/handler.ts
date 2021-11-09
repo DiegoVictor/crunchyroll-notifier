@@ -3,6 +3,7 @@ import { APIGatewayProxyEvent, Handler, SNSEvent } from "aws-lambda";
 import { saveMany as saveEpisodes } from "@infra/repositories/episodes";
 import * as response from "@infra/http/response";
 import { getFromMessages as getEpisodesFromMessages } from "@infra/repositories/episodes";
+import { deleteMessageBatch as removeMessagesFromQueue } from "@infra/services/queue";
 import { getFromRecords as getMessagesFromRecords } from "@infra/services/notification";
 import { mapFields } from "@application/parsers/episodes";
 
@@ -20,6 +21,7 @@ export const process: Handler<SNSEvent | APIGatewayProxyEvent> = async (
         await saveEpisodes(episodes);
       }
 
+      await removeMessagesFromQueue(messages);
     }
 
     return response.NoContent();
