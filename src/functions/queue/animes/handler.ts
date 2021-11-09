@@ -39,7 +39,7 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       }
       await Promise.all(promises);
 
-      if (globalThis.process.env.EPISODES_PROCESSING_TOPIC_ARN) {
+      if (messages.length > 0) {
         await processEpisodesMessage(messages);
       }
     }
