@@ -28,3 +28,6 @@ export const sendSubscribeRequest = async (topic: string) => {
     TopicArn: process.env.GENERAL_TOPIC_ARN,
   });
 };
+
+export const getFromRecords = (records: SNSEventRecord[]): Message[] =>
+  records.map(({ Sns: { Message } }) => JSON.parse(Message)).flat();
