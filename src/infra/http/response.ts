@@ -8,6 +8,11 @@ export const OK = <T>(body: T) => ({
   body: JSON.stringify(body),
 });
 
+export const BadRequest = <T>(body: T) => ({
+  statusCode: 400,
+  body: JSON.stringify(body),
+});
+
 export const InternalServerError = () => ({
   statusCode: 500,
   body: JSON.stringify({
