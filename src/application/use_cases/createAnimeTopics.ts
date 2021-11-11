@@ -12,11 +12,12 @@ const createAnimeTopic = async ({ topic }: Anime) => {
   );
 };
 
-export const createAnimeTopics = async (animes: Anime[]) =>
-  Promise.all(
+export const createAnimeTopics = async (animes: Anime[]) => {
+  await Promise.all(
     animes.map((anime) =>
       createAnimeTopic(anime).then(() =>
         sendSubscribeRequest(`premium-${anime.topic}`)
       )
     )
   );
+};
