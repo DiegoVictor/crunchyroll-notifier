@@ -5,6 +5,9 @@
   "scripts": {
     "dev:server": "nodemon --exec sls offline --stage stg",
     "deploy:stg": "sls deploy --stage stg",
+    "deploy:prd": "sls deploy --stage prd",
+    "undeploy:stg": "sls remove --stage stg",
+    "undeploy:prd": "sls remove --stage prd",
     "test": "jest --runInBand"
   },
   "engines": {
