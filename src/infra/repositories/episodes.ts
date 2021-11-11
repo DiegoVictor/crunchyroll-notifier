@@ -1,6 +1,7 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 
+import { Episode } from "@application/contracts/Episode";
 import { Message } from "@infra/contracts/Message";
 
 const dynamoDB = new DynamoDB({});
