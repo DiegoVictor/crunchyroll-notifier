@@ -9,6 +9,26 @@ export default {
       http: {
         method: "post",
         path: "animes",
+        request: {
+          schemas: {
+            "application/json": {
+              type: "array",
+              items: {
+                required: ["title", "active"],
+                properties: {
+                  title: {
+                    type: "string",
+                    title: "title",
+                  },
+                  active: {
+                    type: "boolean",
+                    title: "active",
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     },
   ],
