@@ -5,7 +5,7 @@ export default {
   events: [
     {
       http: {
-        method: "head",
+        method: "get",
         path: "rss/process",
         request: {
           parameters: {
