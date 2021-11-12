@@ -17,7 +17,7 @@
     "@aws-sdk/client-dynamodb": "^3.35.0",
     "@aws-sdk/client-sns": "^3.36.0",
     "@aws-sdk/client-sqs": "^3.36.0",
-    "@aws-sdk/util-dynamodb": "^3.37.0",
+    "@aws-sdk/util-dynamodb": "^3.38.0",
     "axios": "^0.21.4",
     "date-fns": "^2.24.0",
     "source-map-support": "^0.5.19",
