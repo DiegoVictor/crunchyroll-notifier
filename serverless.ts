@@ -94,6 +94,19 @@ const serverlessConfiguration: AWS = {
   },
   resources: {
     Resources: {
+      ApiGatewayResponse: {
+        Type: "AWS::ApiGateway::GatewayResponse",
+        Properties: {
+          RestApiId: {
+            Ref: "ApiGatewayRestApi",
+          },
+          ResponseType: "BAD_REQUEST_BODY",
+          ResponseTemplates: {
+            "application/json":
+              '{"message":$context.error.messageString,"validation": "$context.error.validationErrorString"}',
+          },
+        },
+      },
       EpisodesQueue: {
         Type: "AWS::SQS::Queue",
         Properties: {
