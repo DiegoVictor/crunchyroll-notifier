@@ -129,6 +129,22 @@ const serverlessConfiguration: AWS = {
           },
         },
       },
+      ApiGatewayRestApiAuthorizer: {
+        Type: "AWS::ApiGateway::Authorizer",
+        Properties: {
+          Name: "crunchyroll-notifier-${opt:stage}-authorizer",
+          Type: "COGNITO_USER_POOLS",
+          IdentitySource: "method.request.header.Authorization",
+          RestApiId: {
+            Ref: "ApiGatewayRestApi",
+          },
+          ProviderARNs: [
+            {
+              "Fn::GetAtt": ["UserPool", "Arn"],
+            },
+          ],
+        },
+      },
       EpisodesQueue: {
         Type: "AWS::SQS::Queue",
         Properties: {
