@@ -1,5 +1,12 @@
+import * as faker from "faker";
+
 import { Anime } from "@application/contracts/Anime";
-import { InternalServerError, NoContent, OK } from "@infra/http/response";
+import {
+  BadRequest,
+  InternalServerError,
+  NoContent,
+  OK,
+} from "@infra/http/response";
 import { factory } from "../../../utils/factory";
 
 describe("Response", () => {
@@ -25,6 +32,16 @@ describe("Response", () => {
       body: JSON.stringify({
         code: 500,
         message: "Ops! Something goes wrong, try again later",
+      }),
+    });
+  });
+
+  it("should be able to return a 400 BadRequest", async () => {
+    const message = faker.lorem.paragraph();
+    expect(BadRequest({ message })).toStrictEqual({
+      statusCode: 400,
+      body: JSON.stringify({
+        message,
       }),
     });
   });
