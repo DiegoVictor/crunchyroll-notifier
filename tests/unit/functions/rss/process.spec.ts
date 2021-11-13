@@ -4,6 +4,7 @@ import { Episode } from "@application/contracts/Episode";
 import { process } from "@functions/rss/process/handler";
 import { factory } from "../../../utils/factory";
 import { APIGatewayProxyEvent } from "aws-lambda";
+import { ZodIssue } from "zod";
 
 const getRssEpisodesFrom = jest.fn(
   (): Promise<Episode[]> => Promise.resolve([])
@@ -20,6 +21,7 @@ jest.mock("@application/use_cases/addEpisodesInQueue", () => ({
 }));
 
 const NoContent = jest.fn(() => {});
+const BadRequest = jest.fn((_: ZodIssue[]) => {});
 const InternalServerError = jest.fn(() => ({
   statusCode: 500,
   body: JSON.stringify({
@@ -29,6 +31,7 @@ const InternalServerError = jest.fn(() => ({
 }));
 jest.mock("@infra/http/response", () => ({
   NoContent: () => NoContent(),
+  BadRequest: (errors: ZodIssue[]) => BadRequest(errors),
   InternalServerError: () => InternalServerError(),
 }));
 
@@ -48,6 +51,31 @@ describe("Get Episodes", () => {
 
     expect(addEpisodesInQueue).toHaveBeenCalledWith(episodes);
     expect(NoContent).toHaveBeenCalled();
+  });
+
+  it("should not be able to process new episodes from rss passing invalid date", async () => {
+    const episodes = await factory.attrsMany<Episode>("Episode", 10);
+
+    getRssEpisodesFrom.mockReturnValue(Promise.resolve(episodes));
+
+    await process(
+      createEvent("aws:apiGateway", {
+        queryStringParameters: {
+          date: "",
+        },
+      } as any)
+    );
+
+    expect(addEpisodesInQueue).not.toHaveBeenCalled();
+    expect(BadRequest).toHaveBeenCalledWith([
+      {
+        code: "invalid_string",
+        message:
+          "Must be in format: YYYY-MM-DDTHH:mm:ss.SSSZ (e.g. 2021-11-07T00:00:01.000Z)",
+        path: ["date"],
+        validation: "regex",
+      },
+    ]);
   });
 
   it("should be able to check there are no new episodes in the rss", async () => {
