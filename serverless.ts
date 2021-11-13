@@ -42,6 +42,12 @@ const serverlessConfiguration: AWS = {
       },
       PLATFORM_APPLICATION_ARN:
         "arn:aws:sns:${self:provider.region}:${aws:accountId}:app/GCM/crunchyroll-notifier-${opt:stage}",
+      USER_POOL_ID: {
+        Ref: "UserPool",
+      },
+      USER_POOL_CLIENT_ID: {
+        Ref: "UserPoolClient",
+      },
     },
     lambdaHashingVersion: "20201221",
     iamRoleStatements: [
