@@ -33,6 +33,9 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       EXECUTION_INTERVAL_MINUTES: "${self:custom.executionIntervalMinutes}",
+      QUEUE_URL: {
+        Ref: "EpisodesQueue",
+      },
       EPISODES_PROCESSING_TOPIC_ARN: {
         Ref: "EpisodesProcessingTopic",
       },
