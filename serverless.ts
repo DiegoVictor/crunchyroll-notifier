@@ -81,6 +81,13 @@ const serverlessConfiguration: AWS = {
         ],
         Resource: "arn:aws:sns:${self:provider.region}:${aws:accountId}:*",
       },
+      {
+        Effect: "Allow",
+        Action: ["cognito-idp:AdminInitiateAuth"],
+        Resource: {
+          "Fn::GetAtt": ["UserPool", "Arn"],
+        },
+      },
     ],
   },
   package: {
