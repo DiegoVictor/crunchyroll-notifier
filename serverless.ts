@@ -39,7 +39,7 @@ const serverlessConfiguration: AWS = {
       EPISODES_PROCESSING_TOPIC_ARN: {
         Ref: "EpisodesProcessingTopic",
       },
-      TOPICS_ARN: "arn:aws:sns:${self:provider.region}:${aws:accountId}",
+      BASE_ARN: "arn:aws:sns:${self:provider.region}:${aws:accountId}",
       GENERAL_TOPIC_ARN: {
         Ref: "GeneralTopic",
       },
