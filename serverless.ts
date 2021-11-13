@@ -115,6 +115,20 @@ const serverlessConfiguration: AWS = {
           UsernameAttributes: ["email"],
         },
       },
+      UserPoolClient: {
+        Type: "AWS::Cognito::UserPoolClient",
+        Properties: {
+          ClientName: "crunchyroll-notifier-${opt:stage}-user-pool-client",
+          ExplicitAuthFlows: [
+            "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+            "ALLOW_REFRESH_TOKEN_AUTH",
+          ],
+          GenerateSecret: false,
+          UserPoolId: {
+            Ref: "UserPool",
+          },
+        },
+      },
       EpisodesQueue: {
         Type: "AWS::SQS::Queue",
         Properties: {
