@@ -107,6 +107,14 @@ const serverlessConfiguration: AWS = {
           },
         },
       },
+      UserPool: {
+        Type: "AWS::Cognito::UserPool",
+        Properties: {
+          UserPoolName: "crunchyroll-notifier-${opt:stage}-user-pool",
+          AutoVerifiedAttributes: ["email"],
+          UsernameAttributes: ["email"],
+        },
+      },
       EpisodesQueue: {
         Type: "AWS::SQS::Queue",
         Properties: {
