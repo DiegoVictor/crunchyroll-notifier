@@ -7,6 +7,12 @@ export default {
       http: {
         method: "get",
         path: "rss/process",
+        authorizer: {
+          type: "COGNITO_USER_POOLS",
+          authorizerId: {
+            Ref: "ApiGatewayRestApiAuthorizer",
+          },
+        },
         request: {
           parameters: {
             querystrings: {

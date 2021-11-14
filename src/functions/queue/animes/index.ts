@@ -7,6 +7,12 @@ export default {
       http: {
         method: "head",
         path: "animes/process",
+        authorizer: {
+          type: "COGNITO_USER_POOLS",
+          authorizerId: {
+            Ref: "ApiGatewayRestApiAuthorizer",
+          },
+        },
       },
     },
     {
