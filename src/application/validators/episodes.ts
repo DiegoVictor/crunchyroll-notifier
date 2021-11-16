@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const episodeSchema = z
+const episodesSchema = z
   .array(
     z.object({
       serie: z.string(),
@@ -15,6 +15,6 @@ const episodeSchema = z
   )
   .nonempty();
 
-type Params = z.infer<typeof episodeSchema>;
+type Params = z.infer<typeof episodesSchema>;
 
-export const episodes = (data: Params): Params => episodeSchema.parse(data);
+export const episodes = (data: Params): Params => episodesSchema.parse(data);
