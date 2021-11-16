@@ -9,6 +9,12 @@ export default {
       http: {
         method: "post",
         path: "animes",
+        authorizer: {
+          type: "COGNITO_USER_POOLS",
+          authorizerId: {
+            Ref: "ApiGatewayRestApiAuthorizer",
+          },
+        },
         request: {
           schemas: {
             "application/json": {
