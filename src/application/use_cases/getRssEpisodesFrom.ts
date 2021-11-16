@@ -30,10 +30,9 @@ export const getRssEpisodesFrom = async (date?: string): Promise<Episode[]> => {
           xml.mapFields<Restrictions>(item, restrictionsMap);
 
         if (
-          country.includes("br") &&
-          subtitles &&
-          subtitles.includes("pt - br") &&
-          subtitles.length > 1 &&
+          country?.includes("br") &&
+          subtitles?.includes("pt - br") &&
+          subtitles?.length > 1 &&
           isAfter(premiumPublishDate, lastRun)
         ) {
           const episode = xml.mapFields<Episode>(item, episodesMap);
