@@ -3,7 +3,7 @@ import { isAfter, subMinutes } from "date-fns";
 import { episodesMap, restrictionsMap } from "@application/parsers/episodes";
 import * as xml from "@infra/libs/xml";
 import { Episode, Restrictions } from "@application/contracts/Episode";
-import { getAnimesRss } from "@infra/services/cruchyroll";
+import { getAnimesRss } from "@infra/services/rss";
 
 export const getRssEpisodesFrom = async (date?: string): Promise<Episode[]> => {
   const rss = await getAnimesRss();
