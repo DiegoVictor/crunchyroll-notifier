@@ -26,6 +26,14 @@ export default {
                     type: "string",
                     title: "title",
                   },
+                  description: {
+                    type: "string",
+                    title: "description",
+                  },
+                  image: {
+                    type: "string",
+                    title: "image url",
+                  },
                   active: {
                     type: "boolean",
                     title: "active",
