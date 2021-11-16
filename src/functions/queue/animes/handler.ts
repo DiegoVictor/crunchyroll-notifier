@@ -11,6 +11,9 @@ import { createAnimeTopics } from "@application/use_cases/createAnimeTopics";
 import { Anime } from "@application/contracts/Anime";
 import { processEpisodesMessage } from "@infra/services/notification";
 import { mapFields } from "@application/parsers/animes";
+import { setAnimesImageAndDescription } from "@application/use_cases/setAnimesImageAndDescription";
+import * as validate from "@application/validators/animes";
+import { ZodError, ZodIssue } from "zod";
 
 export const process = async (event?: APIGatewayProxyEvent) => {
   try {
@@ -19,10 +22,9 @@ export const process = async (event?: APIGatewayProxyEvent) => {
       messages.length > 0 ? getAnimesFromMessages(messages) : [];
 
     if (event && event.body && event.body.length > 0) {
-      const items = JSON.parse(event.body);
-      if (items.length > 0) {
-        animes.push(...items.map(mapFields));
-      }
+      validate
+        .animes(JSON.parse(event.body))
+        .map((item) => animes.push(mapFields(item)));
     }
 
     if (animes.length > 0) {
@@ -35,7 +37,10 @@ export const process = async (event?: APIGatewayProxyEvent) => {
 
       const onlyNew = getOnlyNewAnimes(animes, saved);
       if (onlyNew.length > 0) {
-        promises.push(saveAnimes(onlyNew), createAnimeTopics(onlyNew));
+        promises.push(
+          setAnimesImageAndDescription(onlyNew).then(saveAnimes),
+          createAnimeTopics(onlyNew)
+        );
       }
       await Promise.all(promises);
 
@@ -46,6 +51,10 @@ export const process = async (event?: APIGatewayProxyEvent) => {
 
     return response.NoContent();
   } catch (err) {
+    if (err instanceof ZodError) {
+      return response.BadRequest<ZodIssue[]>(err.errors);
+    }
+
     console.log(err);
 
     return response.InternalServerError();
