@@ -2,7 +2,11 @@ import { randomUUID } from "crypto";
 
 import { Anime } from "@application/contracts/Anime";
 
-export const slugify = (string: string) => string.replace(/(\W|_)/gi, "");
+export const slugify = (string: string) =>
+  string
+    .replace(/(\s?-\s?|\s)/gi, "-")
+    .replace(/[.#'_!:]/gi, "")
+    .toLowerCase();
 
 export const mapFields = ({
   id = randomUUID(),
