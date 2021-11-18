@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import * as faker from "faker";
 
 import { process } from "@functions/queue/animes/handler";
 import { Message } from "@infra/contracts/Message";
@@ -85,9 +84,6 @@ describe("Store Animes", () => {
   });
 
   it("should be able to store new animes and trigger episodes processing", async () => {
-    globalThis.process.env.EPISODES_PROCESSING_TOPIC_ARN =
-      faker.datatype.uuid();
-
     const messages = await factory.attrsMany<Message>("Message", 5);
     const animes = messages.map(({ MessageBody: { serie } }) => ({
       id: randomUUID(),
