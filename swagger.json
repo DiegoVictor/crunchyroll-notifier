@@ -13,6 +13,74 @@
       "url":"http://localhost:3000/stg"
     }
   ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "johndoe@gmail.com",
+                "password": "89]Wni!rcK"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "AccessToken": {
+                      "type": "string"
+                    },
+                    "ExpiresIn": {
+                      "type": "string"
+                    },
+                    "IdToken": {
+                      "type": "string"
+                    },
+                    "RefreshToken": {
+                      "type": "string"
+                    },
+                    "TokenType": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "AccessToken": "eyJraWQiOiJyeW5XZUMzSEtCOWtRZUR2MXhabmtQd2pIY0pWUWh0RzVNWlNvb0ZyQ2NnPSIsImFsZyI6IlJTMjU2In0xvckWwoSvrsnvvEWM4rpFAbAv1RXHv18N198MOucPblUoySG42G3xVws4GgSd_YkupvpV-1RLbdqfwtHk3boUG0aFNBMu3DXb7DyQP_GdZWK-gLf3WKr82ZG9D7XhAtuKd2tAMbRxCuotFigdcxO97F0uwi__YwqpwMGfR7mg2mPgFzr84LoIUlNSzo6PBNLLhLLCkOy1uFV7mMU3-w0dkxbk_4njFrw_SpZvN9Mic0Ox9DfGe38KDhjASDe6Qr1255iRYTCc6WJUbSYRNmkewVx3MNWdCWBqrku7IAH5C-QrfQEkk58UJfKL04B2P2QvMNjCTdQC73XRd43ytFN4Q",
+                  "ExpiresIn": 3600,
+                  "IdToken": "eyJraWQiOiI0UkhqRm9DSTZ6NmVUa2pDNWtIZUc1Ym9QVnRqRjIzYjBmaVpGWlIwSTJzPSIsImFsZyI6IlJTMjU2In0DMtN2EwZDIyYWMwOTBkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2MzY0MTE4NDMsImV4cCI6MTYzNjQxNTQ0MywiaWF0IjoxNjM2NDExODQzLCJqdGkiOiJjMmI3ZDRlMy0xZWY4LTQ4ZWItOTAwYy0yMmZjYzljYWEwMTAiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIn0",
+                  "RefreshToken": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.a1kWHHrnZI4eHCVbnZA5EFwZ4YTbDLZtDLlUEGoHiSfYK_PD7iVwW2yGCr_pjs5gEoYG9VuvYh72Lm7LxMrYN0sqzRAViRnfGZ81hzpeSZErljEGOzI05sYx3HT_7073Xn71EJjYe9pMUEQ5iYL27k54b9myKQkyi3AksHd7ez5cq9Gca8ahn6cplgkFdLjYWRRHA61T-Nq7IRKxbgkBTFDImmJ4M71AZ_LfGHtNm1TjRb44rwtmxRApk8ga84DB__4nZVSpo1Uzjnrxy5x6es5JA0nuBrgnNEnoJdtUteuouocfQBuJ6ewCT9MV1S1fKJHS1nutIfZa5zXKyQQXTg.YhO6NJK5we4ixX6H",
+                  "TokenType": "Bearer"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
   "components": {
     "schemas": {
       "Error": {
