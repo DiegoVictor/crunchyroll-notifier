@@ -12,5 +12,23 @@
     {
       "url":"http://localhost:3000/stg"
     }
-  ]
+  ],
+  "components": {
+    "responses": {
+      "InternalServerError": {
+        "description": "When one non expected error occurs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "code": 500,
+              "message": "Ops! Something goes wrong, try again later"
+            }
+          }
+        }
+      }
+    },
+  }
 }
