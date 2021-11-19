@@ -14,6 +14,18 @@
     }
   ],
   "components": {
+    "schemas": {
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "responses": {
       "InternalServerError": {
         "description": "When one non expected error occurs",
