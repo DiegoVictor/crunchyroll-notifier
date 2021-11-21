@@ -6,3 +6,16 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Reads the [Animes' RSS from Crunchyroll](http://feeds.feedburner.com/crunchyroll/rss/anime) and notify users through push notification when new animes' episodes are published.
+
+## Table of Contents
+* [Requirements](#requirements)
+
+# Requirements
+* Node.js ^14.15.0
+* Serveless
+* AWS Account 
+  * [S3](https://aws.amazon.com/s3/)
+  * [DynamoDB](https://aws.amazon.com/dynamodb/)
+  * [SQS](https://aws.amazon.com/sqs/)
+  * [SNS](https://aws.amazon.com/sns/)
+  * [Lambda](https://aws.amazon.com/lambda)
