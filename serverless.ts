@@ -3,6 +3,7 @@ import type { AWS } from "@serverless/typescript";
 import processRss from "@functions/rss/process";
 import processAnimes from "@functions/queue/animes";
 import storeAnimes from "@functions/animes/store";
+import processEpisodes from "@functions/queue/episodes";
 import getActiveAnimes from "@functions/animes/get";
 import login from "@functions/authorization/login";
 
@@ -107,6 +108,7 @@ const serverlessConfiguration: AWS = {
     processRss,
     storeAnimes,
     processAnimes,
+    processEpisodes,
     getActiveAnimes,
     login,
   },
