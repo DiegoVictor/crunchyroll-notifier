@@ -112,6 +112,22 @@
     },
   "components": {
     "schemas": {
+      "Anime": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "topic": {
+            "type": "string"
+          }
+        }
+      },
       "Error": {
         "properties": {
           "code": {
