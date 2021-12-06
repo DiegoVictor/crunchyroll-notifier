@@ -81,6 +81,35 @@
         }
       }
     },
+    "/rss/process": {
+      "head": {
+        "tags": ["RSS"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "date",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "2021-11-03T00:00:01.000Z"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Read episodes from RSS"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
   "components": {
     "schemas": {
       "Error": {
