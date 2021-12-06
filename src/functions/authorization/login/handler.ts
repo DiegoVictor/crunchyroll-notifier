@@ -7,6 +7,7 @@ export const login = async (event: APIGatewayProxyEvent) => {
     const { email, password } = validate.authorization(
       JSON.parse(event.body || "{}")
     );
+    const auth = await authenticate(email, password);
   } catch (err) {
     if (err instanceof ZodError) {
       return response.BadRequest<ZodIssue[]>(err.errors);
