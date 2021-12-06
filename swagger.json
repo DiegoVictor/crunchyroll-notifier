@@ -110,6 +110,43 @@
         }
       }
     },
+    "/animes": {
+      "get": {
+        "tags": ["Animes"],
+        "responses": {
+          "200": {
+            "description": "Return active animes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Anime"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "eb6d70fb-a7d3-4bb7-a656-e6362587ee40",
+                    "title": "The Fruit of Evolution: Before I Knew It, My Life Had It Made",
+                    "active": true,
+                    "topic": "TheFruitofEvolutionBeforeIKnewItMyLifeHadItMade"
+                  },
+                  {
+                    "id": "53a9b86a-4bee-46f0-bb7d-70477210d032",
+                    "title": "CARDFIGHT!! VANGUARD overDress",
+                    "active": true,
+                    "topic": "CARDFIGHTVANGUARDoverDress"
+                  }
+                ]
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+    },
   "components": {
     "schemas": {
       "Anime": {
