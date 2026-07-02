@@ -193,6 +193,23 @@
         }
       }
     },
+    "/animes/process": {
+      "head": {
+        "tags": ["Animes"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Save or reactivate animes in queue and create its topics"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
     },
   "components": {
     "schemas": {
