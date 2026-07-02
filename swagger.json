@@ -211,6 +211,58 @@
         }
       }
     },
+    "/animes/subscribe": {
+      "post": {
+        "tags": ["Animes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["token", "topic"],
+                "title": "Subscription",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "topic": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "token": "fuMwfw3iRGKrEOH-ghlkJ6:APA91bGWOBbxfJQWl8lCX7dfjWZyMuIz1rV4Ya5oe4oAti3cKUqXJZIb4zckQfSBVfo-VIDOp_hXjN9uNPuQo",
+                "topic": "premium-taktopDestiny"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscribe provided token to topic and return subscription arn",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "subscriptionArn": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "subscriptionArn": "arn:aws:sns:us-east-1:000000000000:animes-premium-taktopDestiny-sns-topic:55bb9a8d-bd54-4a39-9dad-3710cb6d9a06"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
   "components": {
     "schemas": {
       "Anime": {
