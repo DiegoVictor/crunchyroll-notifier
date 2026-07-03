@@ -295,6 +295,64 @@
         }
       }
     },
+    "/episodes": {
+      "post": {
+        "tags": ["Episodes"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Episode"
+                    }
+                  },
+                  {
+                    "items": {
+                      "required": [
+                        "serie",
+                        "title",
+                        "thumbnail",
+                        "premiumPublishDate",
+                        "freePublishDate"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": [
+                {
+                  "serie": "Miss Kobayashi's Dragon Maid",
+                  "title": "The World's Only",
+                  "number": 8,
+                  "season": 2,
+                  "description": "Shouta suddenly begins shutting himself up in his room. He's pouring over a complicated grimoire in order to create a magic item as a gift for Father's Day. Lucoa offers to help him since the task is so difficult, but he refuses and declares he must accomplish it by himself. However, he continues to fail to produce it...",
+                  "thumbnail": "https://img1.ak.crunchyroll.com/i/spire1-tmb/1d3a5b639c678919801a789aa8e609751629872417_full.jpg",
+                  "premiumPublishDate": 1634151600000,
+                  "freePublishDate": 1634756400000
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Save new episodes, save and alert new animes and activate existing animes"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
   "components": {
     "schemas": {
       "Anime": {
