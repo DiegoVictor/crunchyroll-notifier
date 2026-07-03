@@ -263,6 +263,38 @@
         }
       }
     },
+    "/animes/unsubscribe": {
+      "post": {
+        "tags": ["Animes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["subscriptionArn"],
+                "properties": {
+                  "subscriptionArn": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "subscriptionArn": "arn:aws:sns:us-east-1:000000000000:animes-premium-taktopDestiny-sns-topic:55bb9a8d-bd54-4a39-9dad-3710cb6d9a06"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Unubscribe provided token from topic"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
   "components": {
     "schemas": {
       "Anime": {
