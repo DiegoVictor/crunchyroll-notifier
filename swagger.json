@@ -353,6 +353,73 @@
         }
       }
     },
+    "/notifications/send": {
+      "head": {
+        "tags": ["Notifications"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Send notifications from episodes with past publish date"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Notifications"],
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Notification"
+                    }
+                  },
+                  {
+                    "items": {
+                      "required": [
+                        "title",
+                        "body",
+                        "image",
+                        "topic"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": [
+                {
+                  "title": "Miss Kobayashi's Dragon Maid",
+                  "body": "#8 - The World's Only released!",
+                  "image": "https://img1.ak.crunchyroll.com/i/spire1-tmb/1d3a5b639c678919801a789aa8e609751629872417_full.jpg",
+                  "topic": "premium-MissKobayashisDragonMaid"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Send notifications from sent records"
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {
       "Anime": {
