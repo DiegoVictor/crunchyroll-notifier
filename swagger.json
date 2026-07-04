@@ -473,6 +473,22 @@
           }
         }
       },
+      "Notification": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          }
+        }
+      },
       "Error": {
         "properties": {
           "code": {
